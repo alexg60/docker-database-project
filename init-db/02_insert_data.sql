@@ -1,62 +1,55 @@
-INSERT INTO department (deptID, deptName, deptAccess) VALUES
-(1, 'IT Support', 'Full Access'),
-(2, 'Human Resources', 'Limited Access'),
-(3, 'Sales', 'Basic Access'),
-(4, 'Warehouse', 'Basic Access'),
-(5, 'Management', 'Full Access'),
-(6, 'Customer Service', 'Limited Access'),
-(7, 'Finance', 'Restricted Access');
+INSERT INTO departments (department_name, location) VALUES
+('IT', 'Corporate HQ'),
+('Marketing', 'Corporate HQ'),
+('Finance', 'Corporate HQ'),
+('Retail Downtown', 'Downtown Store'),
+('Retail Uptown', 'Uptown Store'),
+('Retail Eastside', 'Eastside Store');
 
-INSERT INTO users (userID, userName, uemail, upass, deptID, activeStatus, startDate) VALUES
-(101, 'Alex Gilbert', 'alex@summitridge.com', 'pass123', 1, 'Y', '2026-01-15'),
-(102, 'Mia Carter', 'mia@summitridge.com', 'pass234', 2, 'Y', '2026-02-01'),
-(103, 'Jordan Blake', 'jordan@summitridge.com', 'pass345', 1, 'Y', '2026-02-10'),
-(104, 'Liam Turner', 'liam@summitridge.com', 'pass456', 3, 'Y', '2026-03-05'),
-(105, 'Olivia Hayes', 'olivia@summitridge.com', 'pass567', 4, 'Y', '2026-03-10'),
-(106, 'Noah Bennett', 'noah@summitridge.com', 'pass678', 5, 'Y', '2026-03-15'),
-(107, 'Emma Brooks', 'emma@summitridge.com', 'pass789', 6, 'N', '2025-11-20');
+INSERT INTO users (full_name, email, role, department_id) VALUES
+('Marcus Leo', 'marcus.leo@summitridge.com', 'admin', 1),
+('Jordan Lee', 'jordan.lee@summitridge.com', 'it_technician', 1),
+('Sarah Kim', 'sarah.kim@summitridge.com', 'it_technician', 1),
+('Priya Sharma', 'priya.sharma@summitridge.com', 'it_manager', 1),
+('David Nguyen', 'david.nguyen@summitridge.com', 'employee', 2),
+('Emily Torres', 'emily.torres@summitridge.com', 'employee', 4),
+('Carlos Brown', 'carlos.brown@summitridge.com', 'employee', 5),
+('Lisa Chen', 'lisa.chen@summitridge.com', 'employee', 4),
+('Brace Patel', 'brace.patel@summitridge.com', 'employee', 3),
+('Nina Watson', 'nina.watson@summitridge.com', 'employee', 6);
 
-INSERT INTO tickets (tID, ticketTitle, ticketDescription, priorityLevel, startDate, uGenerator, uAssigned) VALUES
-(1001, 'POS system offline', 'Sales register system not responding in store.', 'High', '2026-04-01', 104, 103),
-(1002, 'Email login issue', 'User cannot access company email.', 'Medium', '2026-04-02', 102, 101),
-(1003, 'Printer jam warehouse', 'Warehouse printer jammed during shipping labels.', 'Low', '2026-04-03', 105, 103),
-(1004, 'Inventory scanner not syncing', 'Scanner not updating stock system.', 'High', '2026-04-03', 105, 101),
-(1005, 'VPN access request', 'New manager needs VPN access setup.', 'Medium', '2026-04-04', 106, 103),
-(1006, 'Software install request', 'Need Adobe installed for design team.', 'Low', '2026-04-04', 101, 103),
-(1007, 'Website outage', 'Company website temporarily down.', 'Critical', '2026-04-05', 107, 101);
+INSERT INTO categories (category_name) VALUES
+('POS System'),
+('Hardware'),
+('Software'),
+('Network'),
+('Other');
 
-INSERT INTO ticket_status (statusID, tID, statusName, statusDate) VALUES
-(1, 1001, 'Open', '2026-04-01'),
-(2, 1002, 'In Progress', '2026-04-02'),
-(3, 1003, 'Open', '2026-04-03'),
-(4, 1004, 'In Progress', '2026-04-03'),
-(5, 1005, 'Open', '2026-04-04'),
-(6, 1006, 'Closed', '2026-04-04'),
-(7, 1007, 'Open', '2026-04-05');
+INSERT INTO tickets (title, description, category_id, priority, status, submitted_by, assigned_to, store_location, device_type, device_id, resolution_note) VALUES
+('POS Terminal Down – Register 3','Register 3 at the downtown store is not turning on.',1,'Critical','Closed',6,2,'Downtown Store','POS Terminal','POS-DT-003','Power supply replaced.'),
+('Laptop Cannot Connect to VPN','Cannot connect to VPN.',4,'High','Resolved',5,3,'Corporate HQ','Laptop','LT-HQ-021','VPN updated.'),
+('Barcode Scanner Not Reading','Scanner not reading.',2,'High','In Progress',7,2,'Uptown Store','Scanner','SCAN-UP-002',NULL),
+('Microsoft Office License Expired','Office expired.',3,'Medium','Open',9,NULL,'Corporate HQ','Laptop','LT-HQ-045',NULL),
+('Printer Offline','Printer offline.',2,'Medium','Pending',10,3,'Eastside Store','Printer','PRT-ES-001',NULL),
+('Password Reset','Locked out.',5,'Low','Closed',8,2,'Downtown Store',NULL,NULL,'Reset done.'),
+('Network Outage','No internet.',4,'Critical','In Progress',7,3,'Uptown Store',NULL,NULL,NULL),
+('New Hire Laptop Setup','Setup laptop.',3,'Medium','Open',5,NULL,'Corporate HQ','Laptop',NULL,NULL);
 
-INSERT INTO comments (cID, tID, userID, comment, commentDate) VALUES
-(1, 1001, 103, 'Restarted POS system, still offline.', '2026-04-01'),
-(2, 1002, 101, 'Reset email password and cleared cache.', '2026-04-02'),
-(3, 1003, 103, 'Removed paper jam and tested printer.', '2026-04-03'),
-(4, 1004, 101, 'Reconnected scanner to network.', '2026-04-03'),
-(5, 1005, 103, 'VPN credentials created and sent.', '2026-04-04'),
-(6, 1006, 103, 'Adobe installed successfully.', '2026-04-04'),
-(7, 1007, 101, 'Investigating server downtime.', '2026-04-05');
+INSERT INTO ticket_status (ticket_id, changed_by, old_status, new_status) VALUES
+(1,6,NULL,'Open'),
+(1,2,'Open','In Progress'),
+(1,2,'In Progress','Resolved'),
+(1,4,'Resolved','Closed');
 
-INSERT INTO assets (assetID, assetName, assetType, serialNumber, purchaseDate, assetStatus, assignedTo, deptID) VALUES
-(201, 'Dell Latitude 5440', 'Laptop', 'SR-LT-001', '2025-10-15', 'Assigned', 101, 1),
-(202, 'HP LaserJet Pro', 'Printer', 'SR-PR-002', '2025-09-20', 'In Use', NULL, 4),
-(203, 'Zebra Scanner X1', 'Scanner', 'SR-SC-003', '2025-12-05', 'Assigned', 105, 4),
-(204, 'MacBook Pro', 'Laptop', 'SR-LT-004', '2025-11-01', 'Assigned', 104, 3),
-(205, 'Cisco Router', 'Network', 'SR-NW-005', '2025-08-18', 'In Use', NULL, 1),
-(206, 'iPhone 14', 'Mobile', 'SR-MB-006', '2025-12-10', 'Assigned', 106, 5),
-(207, 'Desktop Workstation', 'Desktop', 'SR-DT-007', '2025-07-25', 'Available', NULL, 7);
+INSERT INTO comments (ticket_id, user_id, comment_text, is_internal) VALUES
+(1,2,'Power issue confirmed.',TRUE),
+(1,6,'Thanks!',FALSE),
+(2,3,'VPN fixed.',TRUE);
 
-INSERT INTO software_licenses (licenseID, softwareName, licenseKey, totalSeats, usedSeats, expirationDate, assignedTo, deptID) VALUES
-(301, 'Microsoft Office 365', 'SR-OFF-12345', 100, 80, '2027-01-01', 101, 1),
-(302, 'Adobe Creative Cloud', 'SR-ADB-23456', 25, 20, '2026-12-31', 104, 3),
-(303, 'Jira Software', 'SR-JRA-34567', 50, 30, '2027-06-30', NULL, 1),
-(304, 'Zoom Business', 'SR-ZOM-45678', 40, 28, '2026-11-15', 102, 2),
-(305, 'Slack Enterprise', 'SR-SLK-56789', 60, 45, '2027-03-20', NULL, 6),
-(306, 'QuickBooks', 'SR-QBK-67890', 20, 15, '2026-09-10', 107, 7),
-(307, 'AutoCAD', 'SR-AUT-78901', 15, 10, '2027-05-05', 103, 1);
+INSERT INTO assets (asset_name, device_type, make_model, serial_number, purchase_date, warranty_expiry, assigned_to, store_location, status) VALUES
+('POS-DT-001','POS Terminal','Epson','SN1','2021-01-01','2024-01-01',6,'Downtown Store','Active'),
+('SCAN-UP-002','Scanner','Zebra','SN2','2022-01-01','2025-01-01',7,'Uptown Store','In Repair');
+
+INSERT INTO licenses (software_name, vendor, license_key, total_seats, seats_in_use, expiry_date, purchased_date, notes) VALUES
+('Microsoft 365','Microsoft','KEY1',50,47,'2024-08-31','2023-09-01','Renew soon'),
+('Adobe CC','Adobe','KEY2',10,6,'2025-01-15','2024-01-15','Marketing use');
