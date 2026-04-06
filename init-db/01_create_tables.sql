@@ -10,7 +10,7 @@ CREATE TABLE users (
     uemail VARCHAR(100) NOT NULL UNIQUE,
     upass VARCHAR(100) NOT NULL,
     deptID INT,
-    activeStatus ENUM('Y','N') DEFAULT 'Y',
+    activeStatus CHAR(1) DEFAULT 'Y' CHECK (activeStatus IN ('Y','N')),
     startDate DATE,
     FOREIGN KEY (deptID) REFERENCES department(deptID)
 );
