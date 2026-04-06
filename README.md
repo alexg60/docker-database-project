@@ -1,6 +1,6 @@
 # IT Ticketing System Database (Summit Ridge)
 
-This project sets up a PostgreSQL database for an IT ticketing system using Docker. When the container starts, it automatically creates the tables and inserts sample data for Summit Ridge Clothing Company.
+This project sets up a SQL database for an IT ticketing system using Docker. When the container starts, it automatically creates the tables and inserts sample data for Summit Ridge Clothing Company.
 
 To run it:
 docker compose up -d
