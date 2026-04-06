@@ -4,6 +4,7 @@ This project sets up a PostgreSQL database for an IT ticketing system using Dock
 
 To run it:
 docker compose up -d
+docker start my_project_db                                
 
 To connect:
 docker exec -it my_project_db psql -U student -d projectdb
@@ -18,7 +19,7 @@ SELECT * FROM assets;
 SELECT * FROM licenses;
 
 To stop:
-docker compose down
+docker compose down -v
 
 If you change SQL files, reset it:
 docker compose down -v
